@@ -1301,10 +1301,10 @@ static int h264_select_output_frame(H264Context *h)
     cur->mmco_reset = h->mmco_reset;
     h->mmco_reset = 0;
 
-    if (sps->bitstream_restriction_flag ||
-        h->avctx->strict_std_compliance >= FF_COMPLIANCE_STRICT) {
-        h->avctx->has_b_frames = FFMAX(h->avctx->has_b_frames, sps->num_reorder_frames);
-    }
+//    if (sps->bitstream_restriction_flag ||
+//        h->avctx->strict_std_compliance >= FF_COMPLIANCE_STRICT) {
+//        h->avctx->has_b_frames = FFMAX(h->avctx->has_b_frames, sps->num_reorder_frames);
+//    }
 
     for (i = 0; 1; i++) {
         if(i == H264_MAX_DPB_FRAMES || cur->poc < h->last_pocs[i]){
@@ -1326,9 +1326,9 @@ static int h264_select_output_frame(H264Context *h)
         h->last_pocs[0] = cur->poc;
         cur->mmco_reset = 1;
     } else if(h->avctx->has_b_frames < out_of_order && !sps->bitstream_restriction_flag){
-        int loglevel = h->avctx->frame_num > 1 ? AV_LOG_WARNING : AV_LOG_VERBOSE;
-        av_log(h->avctx, loglevel, "Increasing reorder buffer to %d\n", out_of_order);
-        h->avctx->has_b_frames = out_of_order;
+//        int loglevel = h->avctx->frame_num > 1 ? AV_LOG_WARNING : AV_LOG_VERBOSE;
+//        av_log(h->avctx, loglevel, "Increasing reorder buffer to %d\n", out_of_order);
+//        h->avctx->has_b_frames = out_of_order;
     }
 
     pics = 0;
@@ -1407,10 +1407,11 @@ static int h264_field_start(H264Context *h, const H264SliceContext *sl,
 
     sps = h->ps.sps;
 
-    if (sps->bitstream_restriction_flag &&
-        h->avctx->has_b_frames < sps->num_reorder_frames) {
-        h->avctx->has_b_frames = sps->num_reorder_frames;
-    }
+//    if (sps->bitstream_restriction_flag &&
+//        h->avctx->has_b_frames < sps->num_reorder_frames) {
+//        h->avctx->has_b_frames = sps->num_reorder_frames;
+//    }
+
 
     last_pic_droppable   = h->droppable;
     last_pic_structure   = h->picture_structure;
