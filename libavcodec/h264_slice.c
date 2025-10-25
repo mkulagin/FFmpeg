@@ -1293,6 +1293,8 @@ static int h264_export_frame_props(H264Context *h)
 
 static int h264_select_output_frame(H264Context *h)
 {
+#error fail master build on purpose to ensure that proper branch is built
+
     const SPS *sps = h->ps.sps;
     H264Picture *out = h->cur_pic_ptr;
     H264Picture *cur = h->cur_pic_ptr;
